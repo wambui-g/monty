@@ -1,6 +1,8 @@
 #include "monty.h"
 #include <stdio.h>
 
+#define MAX_LINE_LENGTH 1024
+
 /**
  * main- entry point
  * @argc: number of arguements
@@ -11,23 +13,26 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *opcode, *arg = strtok(line, " \t\n");
+	char line[MAX_LINE_LENGTH];
+	char *opcode;
+	char *arg;
 	unsigned int line_number = 1;
 	int value;
-	size_t len = 0;
+	/*size_t len = 0;*/
 	stack_t *stack = NULL;
 
 	check_arguements(argc);
 	file = open_file(argv[1]);
-	while (fgets(line, len, file) != NULL)
+	while (fgets(line, MAX_LINE_LENGTH, file) != NULL)
 	{
 		opcode = strtok(line, " \t\n");
 		if (opcode && strcmp(opcode, "push") == 0)
 		{
+			arg = strtok(NULL, " \t\n");
 			if (!arg || !is_int(arg))
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", line_number);
-				free(line);
+				/* free(line);*/
 				fclose(file);
 				exit(EXIT_FAILURE);
 			}
@@ -44,7 +49,7 @@ int main(int argc, char *argv[])
 		}
 		line_number++;
 	}
-	free(line);
+	/*free(line);*/
 	fclose(file);
 	exit(EXIT_SUCCESS);
 }
