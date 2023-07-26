@@ -33,7 +33,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *stack = NULL;
 
 /**
  * is_int- checks if input is integer
@@ -41,22 +40,7 @@ stack_t *stack = NULL;
  *
  * Return: 1 if int, 0 otherwise
  */
-int is_int(const char *str)
-{
-	int i = 0;
-
-	if (!str)
-		return (0);
-	if (str[0] == '-')
-		i++;
-	for (; str[i]; i++)
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-	}
-	return (1);
-}
-
+int is_int(const char *str);
 void push(stack_t **stack, unsigned int line_number, int value);
 void pall(stack_t **stack, unsigned int line_number);
 void check_arguements(int argc);

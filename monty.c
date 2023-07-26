@@ -12,12 +12,14 @@ int main(int argc, char *argv[])
 {
 	FILE *file;
 	char *line = NULL, *opcode, *arg = strtok(line, " \t\n");
-	unsigned int line_number = 1, read, value;
+	unsigned int line_number = 1;
+	int value;
 	size_t len = 0;
+	stack_t *stack = NULL;
 
 	check_arguements(argc);
 	file = open_file(argv[1]);
-	while ((read == getline(&line, &len, file)) != -1)
+	while (fgets(line, len, file) != NULL)
 	{
 		opcode = strtok(line, " \t\n");
 		if (opcode && strcmp(opcode, "push") == 0)
