@@ -11,25 +11,12 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *opcode;
+	char *line = NULL, *opcode, *arg = strtok(line, " \t\n");
+	unsigned int line_number = 1, read, value;
 	size_t len = 0;
-	ssize_t read;
-	unsigned int line_number = 1;
-	char *arg = strtok(line, " \t\n");
-	int value;
 
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-
-	file = fopen(argv[1], "r");
-	if (!file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+	check_arguements(argc);
+	file = open_file(argv[1]);
 	while ((read == getline(&line, &len, file)) != -1)
 	{
 		opcode = strtok(line, " \t\n");
@@ -58,4 +45,37 @@ int main(int argc, char *argv[])
 	free(line);
 	fclose(file);
 	exit(EXIT_SUCCESS);
+}
+
+/**
+ * check_arguements- helper function
+ * @argc: arguements
+ *
+ * Return: void
+ */
+void check_arguements(int argc)
+{
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * open_file- helper function
+ * @file_path: as is
+ *
+ * Return: file
+ */
+FILE *open_file(const char *file_path)
+{
+	FILE *file = fopen(file_path, "r");
+
+	if (!file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", file_path);
+		exit(EXIT_FAILURE);
+	}
+	return (file);
 }

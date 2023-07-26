@@ -59,5 +59,7 @@ int is_int(const char *str)
 
 void push(stack_t **stack, unsigned int line_number, int value);
 void pall(stack_t **stack, unsigned int line_number);
+void check_arguements(int argc);
+FILE *open_file(const char *file_path);
 
 #endif /* MONTY_H */
