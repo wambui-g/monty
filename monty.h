@@ -43,11 +43,14 @@ typedef struct instruction_s
 int is_int(const char *str);
 void push(stack_t **stack, unsigned int line_number, int value);
 void pall(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number;
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 void check_arguements(int argc);
 FILE *open_file(const char *file_path);
 void free_stack(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_number);
 int is_stack_empty(stack_t *stack);
-void exit_helper(FILE *file, stack_t **stack);
 
 #endif /* MONTY_H */
