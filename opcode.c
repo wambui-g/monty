@@ -34,7 +34,7 @@ void handle_opcode(char *opcode, char *arg,
 	else if (opcode && strcmp(opcode, "add") == 0)
 		add(stack, line_number);
 	else if (opcode && strcmp(opcode, "nop") == 0)
-		add(stack, line_number);
+		nop(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
