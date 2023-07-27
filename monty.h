@@ -47,6 +47,7 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
 void check_arguements(int argc);
 FILE *open_file(const char *file_path);
 void free_stack(stack_t **stack);
