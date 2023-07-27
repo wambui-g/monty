@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	char *opcode;
 	char *arg;
 	unsigned int line_number = 1;
-	int value;
+	/*int value;*/
 	/*size_t len = 0;*/
 	stack_t *stack = NULL;
 
@@ -27,30 +27,13 @@ int main(int argc, char *argv[])
 	{
 		opcode = strtok(line, " \t\n");
 		arg = strtok(NULL, " \t\n");
-		if (opcode && strcmp(opcode, "push") == 0)
-		{
-			if (!arg || !is_int(arg))
-			{
-				fprintf(stderr, "L%u: usage: push integer\n", line_number);
-				exit_helper(file, &stack);
-				exit(EXIT_FAILURE);
-			}
-			value = atoi(arg);
-			push(&stack, line_number, value);
-		}
-		else if (opcode && strcmp(opcode, "pall") == 0)
-			pall(&stack, line_number);
-		else if (opcode && strcmp(opcode, "pint") == 0)
-			pint(&stack, line_number);
-		else
-		{
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-			exit_helper(file, &stack);
-			exit(EXIT_FAILURE);
-		}
+
+		handle_opcode(opcode, arg, &stack, line_number);
+
 		line_number++;
 	}
-	exit_helper(file, &stack);
+	fclose(file);
+	free_stack(&stack);
 	exit(EXIT_SUCCESS);
 }
 
@@ -105,17 +88,4 @@ void free_stack(stack_t **stack)
 		current = next;
 	}
 	*stack = NULL;
-}
-
-/**
- * exit_helper- helper
- * @file: file
- * @stack: stack
- *
- * Return: void
- */
-void exit_helper(FILE *file, stack_t **stack)
-{
-	fclose(file);
-	free_stack(stack);
 }

@@ -19,7 +19,6 @@ void handle_opcode(char *opcode, char *arg,
 		if (!arg || !is_int(arg))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			fclose(file);
 			free_stack(stack);
 			exit(EXIT_FAILURE);
 		}
@@ -27,13 +26,12 @@ void handle_opcode(char *opcode, char *arg,
 		push(stack, line_number, value);
 	}
 	else if (strcmp(opcode, "pall") == 0)
-	{
 		pall(stack, line_number);
-	}
+	else if (strcmp(opcode, "pop") == 0)
+		pop(stack, line_number);
 	else
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_number);
-		fclose(file);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
