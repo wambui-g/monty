@@ -25,10 +25,12 @@ void handle_opcode(char *opcode, char *arg,
 		value = atoi(arg);
 		push(stack, line_number, value);
 	}
-	else if (strcmp(opcode, "pall") == 0)
+	else if (opcode && strcmp(opcode, "pall") == 0)
 		pall(stack, line_number);
-	else if (strcmp(opcode, "pop") == 0)
+	else if (opcode && strcmp(opcode, "pop") == 0)
 		pop(stack, line_number);
+	else if (opcode && strcmp(opcode, "swap") == 0)
+		swap(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
