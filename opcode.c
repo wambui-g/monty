@@ -27,6 +27,8 @@ void handle_opcode(char *opcode, char *arg,
 	}
 	else if (opcode && strcmp(opcode, "pall") == 0)
 		pall(stack, line_number);
+	else if (opcode && strcmp(opcode, "pint") == 0)
+		pint(stack, line_number);
 	else if (opcode && strcmp(opcode, "pop") == 0)
 		pop(stack, line_number);
 	else if (opcode && strcmp(opcode, "swap") == 0)
